@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "HANDOVER_NOT_APPROVED",
+    "message": "Example error message for HANDOVER_NOT_APPROVED",
+    "details": null,
+    "request_id": "example-request-id-1234"
+  }
+}

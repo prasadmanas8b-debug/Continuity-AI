@@ -1,0 +1,12 @@
+{
+  "handover_id": "ho-approved-001",
+  "tasks_total": 3,
+  "results_total": 3,
+  "pass_count": 2,
+  "needs_help_count": 1,
+  "total_time_seconds": 240,
+  "hints_used": 1,
+  "missing_information": [
+    "Missing clear link to staging database credentials."
+  ]
+}

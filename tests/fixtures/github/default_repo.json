@@ -1,0 +1,13 @@
+{
+  "commit_sha": "c0ffee1234567890abcdef1234567890abcdef12",
+  "files": [
+    {
+      "path": "README.md",
+      "content": "# Continuity AI Roomiez Demo\nProject Roomiez backend and architecture specification.\n"
+    },
+    {
+      "path": "docs/architecture.md",
+      "content": "# System Architecture\nAuthentication is implemented using JWT tokens.\n"
+    }
+  ]
+}

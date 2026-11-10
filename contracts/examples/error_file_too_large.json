@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "FILE_TOO_LARGE",
+    "message": "Example error message for FILE_TOO_LARGE",
+    "details": null,
+    "request_id": "example-request-id-1234"
+  }
+}

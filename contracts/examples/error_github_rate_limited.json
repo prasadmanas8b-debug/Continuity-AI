@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "GITHUB_RATE_LIMITED",
+    "message": "Example error message for GITHUB_RATE_LIMITED",
+    "details": null,
+    "request_id": "example-request-id-1234"
+  }
+}

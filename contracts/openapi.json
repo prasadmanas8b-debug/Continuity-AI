@@ -1,0 +1,4096 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Continuity AI API",
+    "description": "Evidence-first project knowledge handover platform API specification and backend",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Health Check",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/meta": {
+      "get": {
+        "tags": [
+          "Meta"
+        ],
+        "summary": "Get Meta",
+        "operationId": "get_meta_api_v1_meta_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetaResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/demo-users": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "List Demo Users",
+        "operationId": "list_demo_users_api_v1_auth_demo_users_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response List Demo Users Api V1 Auth Demo Users Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/demo-login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Demo Login",
+        "operationId": "demo_login_api_v1_auth_demo_login_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DemoLoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemoLoginResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/me": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Get Current User Profile",
+        "operationId": "get_current_user_profile_api_v1_me_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUserResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "List Projects",
+        "operationId": "list_projects_api_v1_projects_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Limit",
+              "maximum": 500.0,
+              "minimum": 1.0,
+              "type": "integer",
+              "default": 100
+            },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Offset",
+              "minimum": 0.0,
+              "type": "integer",
+              "default": 0
+            },
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Create Project",
+        "operationId": "create_project_api_v1_projects_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{project_id}": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Get Project Summary",
+        "operationId": "get_project_summary_api_v1_projects__project_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectSummary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{project_id}/members": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Get Project Members",
+        "operationId": "get_project_members_api_v1_projects__project_id__members_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectMembersResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{project_id}/members/{target_user_id}/revoke": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Revoke Member",
+        "operationId": "revoke_member_api_v1_projects__project_id__members__target_user_id__revoke_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Target User Id",
+              "type": "string"
+            },
+            "name": "target_user_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberRevokeResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{project_id}/sources": {
+      "get": {
+        "tags": [
+          "Sources"
+        ],
+        "summary": "List Sources",
+        "operationId": "list_sources_api_v1_projects__project_id__sources_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Limit",
+              "maximum": 500.0,
+              "minimum": 1.0,
+              "type": "integer",
+              "default": 100
+            },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Offset",
+              "minimum": 0.0,
+              "type": "integer",
+              "default": 0
+            },
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourceListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{project_id}/sources/upload": {
+      "post": {
+        "tags": [
+          "Sources"
+        ],
+        "summary": "Upload Source",
+        "operationId": "upload_source_api_v1_projects__project_id__sources_upload_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Idempotency-Key",
+              "type": "string"
+            },
+            "name": "Idempotency-Key",
+            "in": "header"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_source_api_v1_projects__project_id__sources_upload_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{project_id}/sources/github": {
+      "post": {
+        "tags": [
+          "Sources"
+        ],
+        "summary": "Import Github",
+        "operationId": "import_github_api_v1_projects__project_id__sources_github_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Idempotency-Key",
+              "type": "string"
+            },
+            "name": "Idempotency-Key",
+            "in": "header"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GitHubImportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GitHubImportResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sources/{source_id}": {
+      "get": {
+        "tags": [
+          "Sources"
+        ],
+        "summary": "Get Source Detail",
+        "operationId": "get_source_detail_api_v1_sources__source_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Source Id",
+              "type": "string"
+            },
+            "name": "source_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sources/{source_id}/excerpt": {
+      "get": {
+        "tags": [
+          "Sources"
+        ],
+        "summary": "Get Source Excerpt",
+        "operationId": "get_source_excerpt_api_v1_sources__source_id__excerpt_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Source Id",
+              "type": "string"
+            },
+            "name": "source_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Char Start",
+              "minimum": 0.0,
+              "type": "integer"
+            },
+            "name": "char_start",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Char End",
+              "minimum": 0.0,
+              "type": "integer"
+            },
+            "name": "char_end",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourceExcerptResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sources/{source_id}/archive": {
+      "post": {
+        "tags": [
+          "Sources"
+        ],
+        "summary": "Archive Source",
+        "operationId": "archive_source_api_v1_sources__source_id__archive_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Source Id",
+              "type": "string"
+            },
+            "name": "source_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{project_id}/extractions": {
+      "post": {
+        "tags": [
+          "Extractions"
+        ],
+        "summary": "Create Extraction Run",
+        "operationId": "create_extraction_run_api_v1_projects__project_id__extractions_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExtractionRunCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtractionRun"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/extractions/{run_id}": {
+      "get": {
+        "tags": [
+          "Extractions"
+        ],
+        "summary": "Get Extraction Run",
+        "operationId": "get_extraction_run_api_v1_extractions__run_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Run Id",
+              "type": "string"
+            },
+            "name": "run_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtractionRun"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{project_id}/claims": {
+      "get": {
+        "tags": [
+          "Claims"
+        ],
+        "summary": "List Claims",
+        "operationId": "list_claims_api_v1_projects__project_id__claims_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/VerificationStatus"
+            },
+            "name": "verification_status",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ConflictStatus"
+            },
+            "name": "conflict_status",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ReviewStatus"
+            },
+            "name": "review_status",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/FactType"
+            },
+            "name": "fact_type",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Item Id",
+              "type": "string"
+            },
+            "name": "item_id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Limit",
+              "maximum": 500.0,
+              "minimum": 1.0,
+              "type": "integer",
+              "default": 100
+            },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Offset",
+              "minimum": 0.0,
+              "type": "integer",
+              "default": 0
+            },
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaimListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/claims/{claim_id}": {
+      "get": {
+        "tags": [
+          "Claims"
+        ],
+        "summary": "Get Claim Detail",
+        "operationId": "get_claim_detail_api_v1_claims__claim_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Claim Id",
+              "type": "string"
+            },
+            "name": "claim_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaimDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/claims/{claim_id}/reviews": {
+      "post": {
+        "tags": [
+          "Claims"
+        ],
+        "summary": "Submit Review",
+        "operationId": "submit_review_api_v1_claims__claim_id__reviews_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Claim Id",
+              "type": "string"
+            },
+            "name": "claim_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Idempotency-Key",
+              "type": "string"
+            },
+            "name": "Idempotency-Key",
+            "in": "header"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{project_id}/conflicts": {
+      "get": {
+        "tags": [
+          "Conflicts"
+        ],
+        "summary": "List Conflicts",
+        "operationId": "list_conflicts_api_v1_projects__project_id__conflicts_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ConflictRecordStatus"
+            },
+            "name": "status",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Limit",
+              "maximum": 500.0,
+              "minimum": 1.0,
+              "type": "integer",
+              "default": 100
+            },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Offset",
+              "minimum": 0.0,
+              "type": "integer",
+              "default": 0
+            },
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConflictListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/conflicts/{conflict_id}": {
+      "get": {
+        "tags": [
+          "Conflicts"
+        ],
+        "summary": "Get Conflict Detail",
+        "operationId": "get_conflict_detail_api_v1_conflicts__conflict_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Conflict Id",
+              "type": "string"
+            },
+            "name": "conflict_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conflict"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/conflicts/{conflict_id}/resolution": {
+      "post": {
+        "tags": [
+          "Conflicts"
+        ],
+        "summary": "Resolve Conflict",
+        "operationId": "resolve_conflict_api_v1_conflicts__conflict_id__resolution_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Conflict Id",
+              "type": "string"
+            },
+            "name": "conflict_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConflictResolutionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conflict"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{project_id}/handovers": {
+      "get": {
+        "tags": [
+          "Handovers"
+        ],
+        "summary": "List Handovers",
+        "operationId": "list_handovers_api_v1_projects__project_id__handovers_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Limit",
+              "maximum": 500.0,
+              "minimum": 1.0,
+              "type": "integer",
+              "default": 100
+            },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Offset",
+              "minimum": 0.0,
+              "type": "integer",
+              "default": 0
+            },
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HandoverListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Handovers"
+        ],
+        "summary": "Create Handover",
+        "operationId": "create_handover_api_v1_projects__project_id__handovers_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Idempotency-Key",
+              "type": "string"
+            },
+            "name": "Idempotency-Key",
+            "in": "header"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HandoverCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Handover"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/handovers/{handover_id}/refresh": {
+      "post": {
+        "tags": [
+          "Handovers"
+        ],
+        "summary": "Refresh Handover",
+        "operationId": "refresh_handover_api_v1_handovers__handover_id__refresh_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Handover Id",
+              "type": "string"
+            },
+            "name": "handover_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Handover"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/handovers/{handover_id}/eligibility": {
+      "get": {
+        "tags": [
+          "Handovers"
+        ],
+        "summary": "Preview Eligibility",
+        "operationId": "preview_eligibility_api_v1_handovers__handover_id__eligibility_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Handover Id",
+              "type": "string"
+            },
+            "name": "handover_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/handovers/{handover_id}/approve": {
+      "post": {
+        "tags": [
+          "Handovers"
+        ],
+        "summary": "Approve Handover Endpoint",
+        "operationId": "approve_handover_endpoint_api_v1_handovers__handover_id__approve_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Handover Id",
+              "type": "string"
+            },
+            "name": "handover_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Idempotency-Key",
+              "type": "string"
+            },
+            "name": "Idempotency-Key",
+            "in": "header"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HandoverApproveRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Handover"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/handovers/{handover_id}/revoke": {
+      "post": {
+        "tags": [
+          "Handovers"
+        ],
+        "summary": "Revoke Handover Endpoint",
+        "operationId": "revoke_handover_endpoint_api_v1_handovers__handover_id__revoke_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Handover Id",
+              "type": "string"
+            },
+            "name": "handover_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Handover"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/handovers/{handover_id}": {
+      "get": {
+        "tags": [
+          "Handovers"
+        ],
+        "summary": "Get Handover View",
+        "operationId": "get_handover_view_api_v1_handovers__handover_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Handover Id",
+              "type": "string"
+            },
+            "name": "handover_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HandoverDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/handovers/{handover_id}/cold-start/tasks": {
+      "get": {
+        "tags": [
+          "ColdStart"
+        ],
+        "summary": "Get Cold Start Tasks",
+        "operationId": "get_cold_start_tasks_api_v1_handovers__handover_id__cold_start_tasks_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Handover Id",
+              "type": "string"
+            },
+            "name": "handover_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get Cold Start Tasks Api V1 Handovers  Handover Id  Cold Start Tasks Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ColdStartTask"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cold-start/tasks/{task_id}/results": {
+      "post": {
+        "tags": [
+          "ColdStart"
+        ],
+        "summary": "Record Cold Start Result",
+        "operationId": "record_cold_start_result_api_v1_cold_start_tasks__task_id__results_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Task Id",
+              "type": "string"
+            },
+            "name": "task_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Idempotency-Key",
+              "type": "string"
+            },
+            "name": "Idempotency-Key",
+            "in": "header"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ColdStartResultRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ColdStartResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/handovers/{handover_id}/cold-start/summary": {
+      "get": {
+        "tags": [
+          "ColdStart"
+        ],
+        "summary": "Get Summary",
+        "operationId": "get_summary_api_v1_handovers__handover_id__cold_start_summary_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Handover Id",
+              "type": "string"
+            },
+            "name": "handover_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ColdStartSummary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{project_id}/audit": {
+      "get": {
+        "tags": [
+          "Audit"
+        ],
+        "summary": "List Audit Log",
+        "operationId": "list_audit_log_api_v1_projects__project_id__audit_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            },
+            "name": "project_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Limit",
+              "maximum": 500.0,
+              "minimum": 1.0,
+              "type": "integer",
+              "default": 100
+            },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Offset",
+              "minimum": 0.0,
+              "type": "integer",
+              "default": 0
+            },
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Authorization",
+              "type": "string"
+            },
+            "name": "authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApprovalOverride": {
+        "title": "ApprovalOverride",
+        "required": [
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "conflict_ids": {
+            "title": "Conflict Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          }
+        },
+        "additionalProperties": false
+      },
+      "AuditEntry": {
+        "title": "AuditEntry",
+        "required": [
+          "audit_id",
+          "action",
+          "entity_type",
+          "summary",
+          "created_at"
+        ],
+        "type": "object",
+        "properties": {
+          "audit_id": {
+            "title": "Audit Id",
+            "type": "string"
+          },
+          "project_id": {
+            "title": "Project Id",
+            "type": "string"
+          },
+          "actor_id": {
+            "title": "Actor Id",
+            "type": "string"
+          },
+          "action": {
+            "title": "Action",
+            "type": "string"
+          },
+          "entity_type": {
+            "title": "Entity Type",
+            "type": "string"
+          },
+          "entity_id": {
+            "title": "Entity Id",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AuditListResponse": {
+        "title": "AuditListResponse",
+        "required": [
+          "items",
+          "total"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuditEntry"
+            }
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Body_upload_source_api_v1_projects__project_id__sources_upload_post": {
+        "title": "Body_upload_source_api_v1_projects__project_id__sources_upload_post",
+        "required": [
+          "file"
+        ],
+        "type": "object",
+        "properties": {
+          "file": {
+            "title": "File",
+            "type": "string",
+            "format": "binary"
+          },
+          "document_date": {
+            "title": "Document Date",
+            "type": "string"
+          },
+          "sensitivity": {
+            "title": "Sensitivity",
+            "type": "string",
+            "default": "normal"
+          },
+          "audience_roles": {
+            "title": "Audience Roles",
+            "type": "string"
+          }
+        }
+      },
+      "Claim": {
+        "title": "Claim",
+        "required": [
+          "claim_id",
+          "project_id",
+          "item_id",
+          "fact_type",
+          "statement",
+          "original_statement",
+          "verification_status",
+          "conflict_status",
+          "review_status",
+          "sensitivity",
+          "extraction_run_id",
+          "created_at",
+          "updated_at"
+        ],
+        "type": "object",
+        "properties": {
+          "claim_id": {
+            "title": "Claim Id",
+            "type": "string"
+          },
+          "project_id": {
+            "title": "Project Id",
+            "type": "string"
+          },
+          "item_id": {
+            "title": "Item Id",
+            "type": "string"
+          },
+          "fact_type": {
+            "$ref": "#/components/schemas/FactType"
+          },
+          "statement": {
+            "title": "Statement",
+            "type": "string"
+          },
+          "original_statement": {
+            "title": "Original Statement",
+            "type": "string"
+          },
+          "owner": {
+            "title": "Owner",
+            "type": "string"
+          },
+          "verification_status": {
+            "$ref": "#/components/schemas/VerificationStatus"
+          },
+          "conflict_status": {
+            "$ref": "#/components/schemas/ConflictStatus"
+          },
+          "review_status": {
+            "$ref": "#/components/schemas/ReviewStatus"
+          },
+          "sensitivity": {
+            "$ref": "#/components/schemas/Sensitivity"
+          },
+          "audience_roles": {
+            "title": "Audience Roles",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer",
+            "default": 1
+          },
+          "evidence": {
+            "title": "Evidence",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "default": []
+          },
+          "conflict_ids": {
+            "title": "Conflict Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "extraction_run_id": {
+            "title": "Extraction Run Id",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          },
+          "updated_at": {
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClaimDetail": {
+        "title": "ClaimDetail",
+        "required": [
+          "claim_id",
+          "project_id",
+          "item_id",
+          "fact_type",
+          "statement",
+          "original_statement",
+          "verification_status",
+          "conflict_status",
+          "review_status",
+          "sensitivity",
+          "extraction_run_id",
+          "created_at",
+          "updated_at"
+        ],
+        "type": "object",
+        "properties": {
+          "claim_id": {
+            "title": "Claim Id",
+            "type": "string"
+          },
+          "project_id": {
+            "title": "Project Id",
+            "type": "string"
+          },
+          "item_id": {
+            "title": "Item Id",
+            "type": "string"
+          },
+          "fact_type": {
+            "$ref": "#/components/schemas/FactType"
+          },
+          "statement": {
+            "title": "Statement",
+            "type": "string"
+          },
+          "original_statement": {
+            "title": "Original Statement",
+            "type": "string"
+          },
+          "owner": {
+            "title": "Owner",
+            "type": "string"
+          },
+          "verification_status": {
+            "$ref": "#/components/schemas/VerificationStatus"
+          },
+          "conflict_status": {
+            "$ref": "#/components/schemas/ConflictStatus"
+          },
+          "review_status": {
+            "$ref": "#/components/schemas/ReviewStatus"
+          },
+          "sensitivity": {
+            "$ref": "#/components/schemas/Sensitivity"
+          },
+          "audience_roles": {
+            "title": "Audience Roles",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer",
+            "default": 1
+          },
+          "evidence": {
+            "title": "Evidence",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "default": []
+          },
+          "conflict_ids": {
+            "title": "Conflict Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "extraction_run_id": {
+            "title": "Extraction Run Id",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          },
+          "updated_at": {
+            "title": "Updated At",
+            "type": "string"
+          },
+          "review_history": {
+            "title": "Review History",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReviewRecord"
+            },
+            "default": []
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClaimListResponse": {
+        "title": "ClaimListResponse",
+        "required": [
+          "items",
+          "total"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            }
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColdStartOutcome": {
+        "title": "ColdStartOutcome",
+        "enum": [
+          "pass",
+          "needs_help"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "ColdStartResult": {
+        "title": "ColdStartResult",
+        "required": [
+          "result_id",
+          "task_id",
+          "tester_id",
+          "outcome",
+          "time_seconds",
+          "hints_used",
+          "created_at"
+        ],
+        "type": "object",
+        "properties": {
+          "result_id": {
+            "title": "Result Id",
+            "type": "string"
+          },
+          "task_id": {
+            "title": "Task Id",
+            "type": "string"
+          },
+          "tester_id": {
+            "title": "Tester Id",
+            "type": "string"
+          },
+          "outcome": {
+            "$ref": "#/components/schemas/ColdStartOutcome"
+          },
+          "time_seconds": {
+            "title": "Time Seconds",
+            "type": "integer"
+          },
+          "hints_used": {
+            "title": "Hints Used",
+            "type": "integer"
+          },
+          "missing_information": {
+            "title": "Missing Information",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColdStartResultRequest": {
+        "title": "ColdStartResultRequest",
+        "required": [
+          "outcome",
+          "time_seconds",
+          "hints_used"
+        ],
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "$ref": "#/components/schemas/ColdStartOutcome"
+          },
+          "time_seconds": {
+            "title": "Time Seconds",
+            "maximum": 86400.0,
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          "hints_used": {
+            "title": "Hints Used",
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          "missing_information": {
+            "title": "Missing Information",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColdStartSummary": {
+        "title": "ColdStartSummary",
+        "required": [
+          "handover_id",
+          "tasks_total",
+          "results_total",
+          "pass_count",
+          "needs_help_count",
+          "total_time_seconds",
+          "hints_used"
+        ],
+        "type": "object",
+        "properties": {
+          "handover_id": {
+            "title": "Handover Id",
+            "type": "string"
+          },
+          "tasks_total": {
+            "title": "Tasks Total",
+            "type": "integer"
+          },
+          "results_total": {
+            "title": "Results Total",
+            "type": "integer"
+          },
+          "pass_count": {
+            "title": "Pass Count",
+            "type": "integer"
+          },
+          "needs_help_count": {
+            "title": "Needs Help Count",
+            "type": "integer"
+          },
+          "total_time_seconds": {
+            "title": "Total Time Seconds",
+            "type": "integer"
+          },
+          "hints_used": {
+            "title": "Hints Used",
+            "type": "integer"
+          },
+          "missing_information": {
+            "title": "Missing Information",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColdStartTask": {
+        "title": "ColdStartTask",
+        "required": [
+          "task_id",
+          "handover_id",
+          "ordinal",
+          "task_prompt"
+        ],
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "title": "Task Id",
+            "type": "string"
+          },
+          "handover_id": {
+            "title": "Handover Id",
+            "type": "string"
+          },
+          "ordinal": {
+            "title": "Ordinal",
+            "type": "integer"
+          },
+          "task_prompt": {
+            "title": "Task Prompt",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Conflict": {
+        "title": "Conflict",
+        "required": [
+          "conflict_id",
+          "project_id",
+          "item_id",
+          "fact_type",
+          "conflict_type",
+          "status",
+          "is_critical",
+          "summary",
+          "created_at"
+        ],
+        "type": "object",
+        "properties": {
+          "conflict_id": {
+            "title": "Conflict Id",
+            "type": "string"
+          },
+          "project_id": {
+            "title": "Project Id",
+            "type": "string"
+          },
+          "item_id": {
+            "title": "Item Id",
+            "type": "string"
+          },
+          "fact_type": {
+            "$ref": "#/components/schemas/FactType"
+          },
+          "conflict_type": {
+            "$ref": "#/components/schemas/ConflictType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ConflictRecordStatus"
+          },
+          "is_critical": {
+            "title": "Is Critical",
+            "type": "boolean"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "resolution_note": {
+            "title": "Resolution Note",
+            "type": "string"
+          },
+          "claims": {
+            "title": "Claims",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            },
+            "default": []
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          },
+          "resolved_at": {
+            "title": "Resolved At",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConflictListResponse": {
+        "title": "ConflictListResponse",
+        "required": [
+          "items",
+          "total"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Conflict"
+            }
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConflictRecordStatus": {
+        "title": "ConflictRecordStatus",
+        "enum": [
+          "open",
+          "resolved",
+          "unresolved"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "ConflictResolutionRequest": {
+        "title": "ConflictResolutionRequest",
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/ConflictRecordStatus"
+          },
+          "resolution_note": {
+            "title": "Resolution Note",
+            "type": "string"
+          },
+          "superseded_claim_id": {
+            "title": "Superseded Claim Id",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConflictStatus": {
+        "title": "ConflictStatus",
+        "enum": [
+          "none",
+          "conflict",
+          "superseded"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "ConflictType": {
+        "title": "ConflictType",
+        "enum": [
+          "contradiction",
+          "possible_supersession",
+          "missing_information"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "CurrentUserResponse": {
+        "title": "CurrentUserResponse",
+        "required": [
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "memberships": {
+            "title": "Memberships",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectMembershipSummary"
+            },
+            "default": []
+          }
+        },
+        "additionalProperties": false
+      },
+      "DemoLoginRequest": {
+        "title": "DemoLoginRequest",
+        "required": [
+          "user_id"
+        ],
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "title": "User Id",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DemoLoginResponse": {
+        "title": "DemoLoginResponse",
+        "required": [
+          "access_token",
+          "expires_at",
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "title": "Access Token",
+            "type": "string"
+          },
+          "token_type": {
+            "title": "Token Type",
+            "type": "string",
+            "default": "bearer"
+          },
+          "expires_at": {
+            "title": "Expires At",
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "memberships": {
+            "title": "Memberships",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectMembershipSummary"
+            },
+            "default": []
+          }
+        },
+        "additionalProperties": false
+      },
+      "Eligibility": {
+        "title": "Eligibility",
+        "required": [
+          "eligible_claim_count",
+          "excluded_claim_count",
+          "can_approve_without_override"
+        ],
+        "type": "object",
+        "properties": {
+          "eligible_claim_count": {
+            "title": "Eligible Claim Count",
+            "type": "integer"
+          },
+          "excluded_claim_count": {
+            "title": "Excluded Claim Count",
+            "type": "integer"
+          },
+          "open_critical_conflicts": {
+            "title": "Open Critical Conflicts",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EligibilityConflictSummary"
+            },
+            "default": []
+          },
+          "can_approve_without_override": {
+            "title": "Can Approve Without Override",
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EligibilityConflictSummary": {
+        "title": "EligibilityConflictSummary",
+        "required": [
+          "conflict_id",
+          "summary"
+        ],
+        "type": "object",
+        "properties": {
+          "conflict_id": {
+            "title": "Conflict Id",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Evidence": {
+        "title": "Evidence",
+        "required": [
+          "evidence_id",
+          "source_id",
+          "source_label",
+          "exact_quote",
+          "locator",
+          "quote_match_status",
+          "support_status"
+        ],
+        "type": "object",
+        "properties": {
+          "evidence_id": {
+            "title": "Evidence Id",
+            "type": "string"
+          },
+          "source_id": {
+            "title": "Source Id",
+            "type": "string"
+          },
+          "source_label": {
+            "title": "Source Label",
+            "type": "string"
+          },
+          "source_date": {
+            "title": "Source Date",
+            "type": "string"
+          },
+          "exact_quote": {
+            "title": "Exact Quote",
+            "type": "string"
+          },
+          "locator": {
+            "$ref": "#/components/schemas/EvidenceLocator"
+          },
+          "quote_match_status": {
+            "$ref": "#/components/schemas/QuoteMatchStatus"
+          },
+          "support_status": {
+            "$ref": "#/components/schemas/SupportStatus"
+          },
+          "support_note": {
+            "title": "Support Note",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EvidenceLocator": {
+        "title": "EvidenceLocator",
+        "type": "object",
+        "properties": {
+          "page": {
+            "title": "Page",
+            "type": "integer"
+          },
+          "char_start": {
+            "title": "Char Start",
+            "type": "integer"
+          },
+          "char_end": {
+            "title": "Char End",
+            "type": "integer"
+          },
+          "path": {
+            "title": "Path",
+            "type": "string"
+          },
+          "commit_sha": {
+            "title": "Commit Sha",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExtractionRun": {
+        "title": "ExtractionRun",
+        "required": [
+          "run_id",
+          "project_id",
+          "status",
+          "started_at"
+        ],
+        "type": "object",
+        "properties": {
+          "run_id": {
+            "title": "Run Id",
+            "type": "string"
+          },
+          "project_id": {
+            "title": "Project Id",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExtractionRunStatus"
+          },
+          "source_ids": {
+            "title": "Source Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "claims_created": {
+            "title": "Claims Created",
+            "type": "integer",
+            "default": 0
+          },
+          "claims_rejected_by_validation": {
+            "title": "Claims Rejected By Validation",
+            "type": "integer",
+            "default": 0
+          },
+          "error_code": {
+            "title": "Error Code",
+            "type": "string"
+          },
+          "error_message": {
+            "title": "Error Message",
+            "type": "string"
+          },
+          "started_at": {
+            "title": "Started At",
+            "type": "string"
+          },
+          "finished_at": {
+            "title": "Finished At",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExtractionRunCreateRequest": {
+        "title": "ExtractionRunCreateRequest",
+        "type": "object",
+        "properties": {
+          "source_ids": {
+            "title": "Source Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExtractionRunStatus": {
+        "title": "ExtractionRunStatus",
+        "enum": [
+          "queued",
+          "running",
+          "succeeded",
+          "failed"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "FactType": {
+        "title": "FactType",
+        "enum": [
+          "decision",
+          "owner",
+          "status",
+          "blocker",
+          "dependency",
+          "risk",
+          "next_action",
+          "question"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "GitHubImportRequest": {
+        "title": "GitHubImportRequest",
+        "required": [
+          "repo_url"
+        ],
+        "type": "object",
+        "properties": {
+          "repo_url": {
+            "title": "Repo Url",
+            "type": "string"
+          },
+          "sensitivity": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Sensitivity"
+              }
+            ],
+            "default": "normal"
+          },
+          "audience_roles": {
+            "title": "Audience Roles",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          }
+        },
+        "additionalProperties": false
+      },
+      "GitHubImportResponse": {
+        "title": "GitHubImportResponse",
+        "required": [
+          "sources"
+        ],
+        "type": "object",
+        "properties": {
+          "sources": {
+            "title": "Sources",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            }
+          },
+          "skipped": {
+            "title": "Skipped",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GitHubSkippedFile"
+            },
+            "default": []
+          }
+        },
+        "additionalProperties": false
+      },
+      "GitHubSkippedFile": {
+        "title": "GitHubSkippedFile",
+        "required": [
+          "path",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "path": {
+            "title": "Path",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "Handover": {
+        "title": "Handover",
+        "required": [
+          "handover_id",
+          "project_id",
+          "version",
+          "status",
+          "recipient_role",
+          "included_claim_count",
+          "excluded_claim_count",
+          "created_at"
+        ],
+        "type": "object",
+        "properties": {
+          "handover_id": {
+            "title": "Handover Id",
+            "type": "string"
+          },
+          "project_id": {
+            "title": "Project Id",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          },
+          "status": {
+            "$ref": "#/components/schemas/HandoverStatus"
+          },
+          "recipient_role": {
+            "$ref": "#/components/schemas/RecipientRole"
+          },
+          "included_claim_count": {
+            "title": "Included Claim Count",
+            "type": "integer"
+          },
+          "excluded_claim_count": {
+            "title": "Excluded Claim Count",
+            "type": "integer"
+          },
+          "approved_by": {
+            "title": "Approved By",
+            "type": "string"
+          },
+          "approved_at": {
+            "title": "Approved At",
+            "type": "string"
+          },
+          "approval_override": {
+            "$ref": "#/components/schemas/ApprovalOverride"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HandoverApproveRequest": {
+        "title": "HandoverApproveRequest",
+        "type": "object",
+        "properties": {
+          "override_reason": {
+            "title": "Override Reason",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HandoverClaim": {
+        "title": "HandoverClaim",
+        "required": [
+          "claim_id",
+          "item_id",
+          "fact_type",
+          "statement",
+          "verification_status",
+          "review_status",
+          "uncertainty_label"
+        ],
+        "type": "object",
+        "properties": {
+          "claim_id": {
+            "title": "Claim Id",
+            "type": "string"
+          },
+          "item_id": {
+            "title": "Item Id",
+            "type": "string"
+          },
+          "fact_type": {
+            "$ref": "#/components/schemas/FactType"
+          },
+          "statement": {
+            "title": "Statement",
+            "type": "string"
+          },
+          "owner": {
+            "title": "Owner",
+            "type": "string"
+          },
+          "verification_status": {
+            "$ref": "#/components/schemas/VerificationStatus"
+          },
+          "review_status": {
+            "$ref": "#/components/schemas/ReviewStatus"
+          },
+          "uncertainty_label": {
+            "$ref": "#/components/schemas/UncertaintyLabel"
+          },
+          "evidence": {
+            "title": "Evidence",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HandoverEvidence"
+            },
+            "default": []
+          }
+        },
+        "additionalProperties": false
+      },
+      "HandoverCreateRequest": {
+        "title": "HandoverCreateRequest",
+        "required": [
+          "recipient_role"
+        ],
+        "type": "object",
+        "properties": {
+          "recipient_role": {
+            "$ref": "#/components/schemas/RecipientRole"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HandoverDetail": {
+        "title": "HandoverDetail",
+        "required": [
+          "handover_id",
+          "project_id",
+          "version",
+          "status",
+          "recipient_role",
+          "included_claim_count",
+          "excluded_claim_count",
+          "created_at",
+          "project_name"
+        ],
+        "type": "object",
+        "properties": {
+          "handover_id": {
+            "title": "Handover Id",
+            "type": "string"
+          },
+          "project_id": {
+            "title": "Project Id",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          },
+          "status": {
+            "$ref": "#/components/schemas/HandoverStatus"
+          },
+          "recipient_role": {
+            "$ref": "#/components/schemas/RecipientRole"
+          },
+          "included_claim_count": {
+            "title": "Included Claim Count",
+            "type": "integer"
+          },
+          "excluded_claim_count": {
+            "title": "Excluded Claim Count",
+            "type": "integer"
+          },
+          "approved_by": {
+            "title": "Approved By",
+            "type": "string"
+          },
+          "approved_at": {
+            "title": "Approved At",
+            "type": "string"
+          },
+          "approval_override": {
+            "$ref": "#/components/schemas/ApprovalOverride"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          },
+          "project_name": {
+            "title": "Project Name",
+            "type": "string"
+          },
+          "project_overview": {
+            "title": "Project Overview",
+            "type": "string"
+          },
+          "sections": {
+            "title": "Sections",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HandoverSection"
+            },
+            "default": []
+          },
+          "open_conflicts": {
+            "title": "Open Conflicts",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HandoverOpenConflict"
+            },
+            "default": []
+          }
+        },
+        "additionalProperties": false
+      },
+      "HandoverEvidence": {
+        "title": "HandoverEvidence",
+        "required": [
+          "evidence_id",
+          "source_label",
+          "exact_quote",
+          "locator",
+          "support_status"
+        ],
+        "type": "object",
+        "properties": {
+          "evidence_id": {
+            "title": "Evidence Id",
+            "type": "string"
+          },
+          "source_label": {
+            "title": "Source Label",
+            "type": "string"
+          },
+          "source_date": {
+            "title": "Source Date",
+            "type": "string"
+          },
+          "exact_quote": {
+            "title": "Exact Quote",
+            "type": "string"
+          },
+          "locator": {
+            "$ref": "#/components/schemas/EvidenceLocator"
+          },
+          "support_status": {
+            "$ref": "#/components/schemas/SupportStatus"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HandoverListResponse": {
+        "title": "HandoverListResponse",
+        "required": [
+          "items",
+          "total"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Handover"
+            }
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HandoverOpenConflict": {
+        "title": "HandoverOpenConflict",
+        "required": [
+          "conflict_id",
+          "summary"
+        ],
+        "type": "object",
+        "properties": {
+          "conflict_id": {
+            "title": "Conflict Id",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "claim_ids": {
+            "title": "Claim Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          }
+        },
+        "additionalProperties": false
+      },
+      "HandoverSection": {
+        "title": "HandoverSection",
+        "required": [
+          "section_key",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "section_key": {
+            "$ref": "#/components/schemas/SectionKey"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "claims": {
+            "title": "Claims",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HandoverClaim"
+            },
+            "default": []
+          }
+        },
+        "additionalProperties": false
+      },
+      "HandoverStatus": {
+        "title": "HandoverStatus",
+        "enum": [
+          "draft",
+          "approved",
+          "shared",
+          "revoked"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "HealthResponse": {
+        "title": "HealthResponse",
+        "type": "object",
+        "properties": {
+          "status": {
+            "title": "Status",
+            "type": "string",
+            "default": "ok"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IngestionStatus": {
+        "title": "IngestionStatus",
+        "enum": [
+          "pending",
+          "processed",
+          "failed",
+          "archived"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "MemberItem": {
+        "title": "MemberItem",
+        "required": [
+          "user_id",
+          "display_name",
+          "role",
+          "membership_status",
+          "created_at"
+        ],
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "title": "User Id",
+            "type": "string"
+          },
+          "display_name": {
+            "title": "Display Name",
+            "type": "string"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/UserRole"
+          },
+          "recipient_role": {
+            "$ref": "#/components/schemas/RecipientRole"
+          },
+          "membership_status": {
+            "title": "Membership Status",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          },
+          "revoked_at": {
+            "title": "Revoked At",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MemberRevokeResponse": {
+        "title": "MemberRevokeResponse",
+        "type": "object",
+        "properties": {
+          "status": {
+            "title": "Status",
+            "type": "string",
+            "default": "revoked"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MetaResponse": {
+        "title": "MetaResponse",
+        "required": [
+          "contract_version",
+          "app_version"
+        ],
+        "type": "object",
+        "properties": {
+          "contract_version": {
+            "title": "Contract Version",
+            "type": "string"
+          },
+          "app_version": {
+            "title": "App Version",
+            "type": "string"
+          },
+          "auth_mode": {
+            "title": "Auth Mode",
+            "type": "string",
+            "default": "demo"
+          },
+          "llm_mode": {
+            "title": "Llm Mode",
+            "type": "string",
+            "default": "fake"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Project": {
+        "title": "Project",
+        "required": [
+          "project_id",
+          "name",
+          "created_at",
+          "updated_at"
+        ],
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "title": "Project Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          },
+          "updated_at": {
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjectCreateRequest": {
+        "title": "ProjectCreateRequest",
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjectListResponse": {
+        "title": "ProjectListResponse",
+        "required": [
+          "items",
+          "total"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectSummary"
+            }
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjectMembersResponse": {
+        "title": "ProjectMembersResponse",
+        "required": [
+          "items",
+          "total"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MemberItem"
+            }
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjectMembershipSummary": {
+        "title": "ProjectMembershipSummary",
+        "required": [
+          "project_id",
+          "role"
+        ],
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "title": "Project Id",
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/UserRole"
+          },
+          "recipient_role": {
+            "$ref": "#/components/schemas/RecipientRole"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjectSummary": {
+        "title": "ProjectSummary",
+        "required": [
+          "project_id",
+          "name",
+          "created_at",
+          "updated_at",
+          "my_role"
+        ],
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "title": "Project Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          },
+          "updated_at": {
+            "title": "Updated At",
+            "type": "string"
+          },
+          "source_count": {
+            "title": "Source Count",
+            "type": "integer",
+            "default": 0
+          },
+          "claim_count": {
+            "title": "Claim Count",
+            "type": "integer",
+            "default": 0
+          },
+          "open_conflict_count": {
+            "title": "Open Conflict Count",
+            "type": "integer",
+            "default": 0
+          },
+          "pending_review_count": {
+            "title": "Pending Review Count",
+            "type": "integer",
+            "default": 0
+          },
+          "latest_handover_version": {
+            "title": "Latest Handover Version",
+            "type": "integer"
+          },
+          "my_role": {
+            "$ref": "#/components/schemas/UserRole"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuoteMatchStatus": {
+        "title": "QuoteMatchStatus",
+        "enum": [
+          "found",
+          "not_found",
+          "unchecked"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "RecipientRole": {
+        "title": "RecipientRole",
+        "enum": [
+          "backend_developer",
+          "designer"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "ReviewDecision": {
+        "title": "ReviewDecision",
+        "enum": [
+          "accept",
+          "edit",
+          "reject",
+          "unresolved"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "ReviewRecord": {
+        "title": "ReviewRecord",
+        "required": [
+          "review_id",
+          "claim_id",
+          "reviewer_id",
+          "reviewer_name",
+          "decision",
+          "original_statement",
+          "claim_version_after",
+          "created_at"
+        ],
+        "type": "object",
+        "properties": {
+          "review_id": {
+            "title": "Review Id",
+            "type": "string"
+          },
+          "claim_id": {
+            "title": "Claim Id",
+            "type": "string"
+          },
+          "reviewer_id": {
+            "title": "Reviewer Id",
+            "type": "string"
+          },
+          "reviewer_name": {
+            "title": "Reviewer Name",
+            "type": "string"
+          },
+          "decision": {
+            "$ref": "#/components/schemas/ReviewDecision"
+          },
+          "original_statement": {
+            "title": "Original Statement",
+            "type": "string"
+          },
+          "reviewed_statement": {
+            "title": "Reviewed Statement",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "claim_version_after": {
+            "title": "Claim Version After",
+            "type": "integer"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReviewRequest": {
+        "title": "ReviewRequest",
+        "required": [
+          "decision",
+          "expected_version"
+        ],
+        "type": "object",
+        "properties": {
+          "decision": {
+            "$ref": "#/components/schemas/ReviewDecision"
+          },
+          "reviewed_statement": {
+            "title": "Reviewed Statement",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "expected_version": {
+            "title": "Expected Version",
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReviewResponse": {
+        "title": "ReviewResponse",
+        "required": [
+          "review",
+          "claim"
+        ],
+        "type": "object",
+        "properties": {
+          "review": {
+            "$ref": "#/components/schemas/ReviewRecord"
+          },
+          "claim": {
+            "$ref": "#/components/schemas/Claim"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReviewStatus": {
+        "title": "ReviewStatus",
+        "enum": [
+          "pending",
+          "accepted",
+          "edited",
+          "rejected",
+          "unresolved"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "SectionKey": {
+        "title": "SectionKey",
+        "enum": [
+          "current_status",
+          "decisions",
+          "responsibilities",
+          "blockers_dependencies",
+          "risks",
+          "next_actions",
+          "unresolved_questions"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "Sensitivity": {
+        "title": "Sensitivity",
+        "enum": [
+          "normal",
+          "restricted"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "Source": {
+        "title": "Source",
+        "required": [
+          "source_id",
+          "project_id",
+          "source_type",
+          "filename",
+          "source_reference",
+          "content_hash",
+          "sensitivity",
+          "ingestion_status",
+          "size_bytes",
+          "created_at"
+        ],
+        "type": "object",
+        "properties": {
+          "source_id": {
+            "title": "Source Id",
+            "type": "string"
+          },
+          "project_id": {
+            "title": "Project Id",
+            "type": "string"
+          },
+          "source_type": {
+            "$ref": "#/components/schemas/SourceType"
+          },
+          "filename": {
+            "title": "Filename",
+            "type": "string"
+          },
+          "source_reference": {
+            "title": "Source Reference",
+            "type": "string"
+          },
+          "content_hash": {
+            "title": "Content Hash",
+            "type": "string"
+          },
+          "sensitivity": {
+            "$ref": "#/components/schemas/Sensitivity"
+          },
+          "audience_roles": {
+            "title": "Audience Roles",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "ingestion_status": {
+            "$ref": "#/components/schemas/IngestionStatus"
+          },
+          "error_message": {
+            "title": "Error Message",
+            "type": "string"
+          },
+          "document_date": {
+            "title": "Document Date",
+            "type": "string"
+          },
+          "size_bytes": {
+            "title": "Size Bytes",
+            "type": "integer"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SourceExcerptResponse": {
+        "title": "SourceExcerptResponse",
+        "required": [
+          "text",
+          "char_start",
+          "char_end"
+        ],
+        "type": "object",
+        "properties": {
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "char_start": {
+            "title": "Char Start",
+            "type": "integer"
+          },
+          "char_end": {
+            "title": "Char End",
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SourceListResponse": {
+        "title": "SourceListResponse",
+        "required": [
+          "items",
+          "total"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            }
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SourceType": {
+        "title": "SourceType",
+        "enum": [
+          "github",
+          "pdf",
+          "txt",
+          "md",
+          "docx",
+          "task_export"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "SupportStatus": {
+        "title": "SupportStatus",
+        "enum": [
+          "supports",
+          "partial",
+          "does_not_support",
+          "unchecked"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "UncertaintyLabel": {
+        "title": "UncertaintyLabel",
+        "enum": [
+          "none",
+          "uncertain",
+          "unresolved",
+          "conflicted"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "User": {
+        "title": "User",
+        "required": [
+          "user_id",
+          "display_name"
+        ],
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "title": "User Id",
+            "type": "string"
+          },
+          "display_name": {
+            "title": "Display Name",
+            "type": "string"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserRole": {
+        "title": "UserRole",
+        "enum": [
+          "manager",
+          "contributor",
+          "incoming_member"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      },
+      "VerificationStatus": {
+        "title": "VerificationStatus",
+        "enum": [
+          "verified",
+          "rejected",
+          "uncertain"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      }
+    }
+  }
+}

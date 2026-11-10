@@ -1,0 +1,50 @@
+{
+  "handover_id": "ho-approved-002",
+  "project_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "version": 1,
+  "status": "approved",
+  "recipient_role": "designer",
+  "included_claim_count": 1,
+  "excluded_claim_count": 5,
+  "approved_by": "user-manager-001",
+  "approved_at": "2026-11-07T16:30:00Z",
+  "approval_override": null,
+  "created_at": "2026-11-07T15:30:00Z",
+  "project_name": "Project Roomiez",
+  "project_overview": "Roommate finder application",
+  "sections": [
+    {
+      "section_key": "decisions",
+      "title": "Decisions and Rationale",
+      "claims": [
+        {
+          "claim_id": "cl-008",
+          "item_id": "signup_button_color",
+          "fact_type": "decision",
+          "statement": "Signup screen uses the blue primary button.",
+          "owner": null,
+          "verification_status": "verified",
+          "review_status": "accepted",
+          "uncertainty_label": "none",
+          "evidence": [
+            {
+              "evidence_id": "ev-007",
+              "source_label": "design_notes.md",
+              "source_date": "2026-11-07",
+              "exact_quote": "Decision: signup screen uses the blue primary button.",
+              "locator": {
+                "page": 1,
+                "char_start": 0,
+                "char_end": 53,
+                "path": null,
+                "commit_sha": null
+              },
+              "support_status": "supports"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "open_conflicts": []
+}

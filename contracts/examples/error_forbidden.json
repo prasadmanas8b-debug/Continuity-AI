@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "FORBIDDEN",
+    "message": "Example error message for FORBIDDEN",
+    "details": null,
+    "request_id": "example-request-id-1234"
+  }
+}

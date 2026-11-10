@@ -1,0 +1,22 @@
+{
+  "claim_id": "cl-003",
+  "project_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "item_id": "missing_feature",
+  "fact_type": "status",
+  "statement": "Payment gateway is integrated.",
+  "original_statement": "Payment gateway is integrated.",
+  "owner": null,
+  "verification_status": "rejected",
+  "conflict_status": "none",
+  "review_status": "pending",
+  "sensitivity": "normal",
+  "audience_roles": [
+    "backend_developer"
+  ],
+  "version": 1,
+  "evidence": [],
+  "conflict_ids": [],
+  "extraction_run_id": "run-001",
+  "created_at": "2026-11-02T10:10:00Z",
+  "updated_at": "2026-11-02T10:10:00Z"
+}

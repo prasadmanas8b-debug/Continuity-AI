@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "AI_BAD_OUTPUT",
+    "message": "Example error message for AI_BAD_OUTPUT",
+    "details": null,
+    "request_id": "example-request-id-1234"
+  }
+}

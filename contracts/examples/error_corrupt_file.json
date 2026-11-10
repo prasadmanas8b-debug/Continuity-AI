@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "CORRUPT_FILE",
+    "message": "Example error message for CORRUPT_FILE",
+    "details": null,
+    "request_id": "example-request-id-1234"
+  }
+}

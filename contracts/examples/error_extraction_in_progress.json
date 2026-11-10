@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "EXTRACTION_IN_PROGRESS",
+    "message": "Example error message for EXTRACTION_IN_PROGRESS",
+    "details": null,
+    "request_id": "example-request-id-1234"
+  }
+}

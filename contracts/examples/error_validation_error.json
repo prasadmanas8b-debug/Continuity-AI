@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Example error message for VALIDATION_ERROR",
+    "details": null,
+    "request_id": "example-request-id-1234"
+  }
+}

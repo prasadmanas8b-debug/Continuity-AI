@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "UNAUTHENTICATED",
+    "message": "Example error message for UNAUTHENTICATED",
+    "details": null,
+    "request_id": "example-request-id-1234"
+  }
+}

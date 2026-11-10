@@ -1,0 +1,63 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: continuity_ai_db
+    environment:
+      POSTGRES_USER: continuity_user
+      POSTGRES_PASSWORD: continuity_pass
+      POSTGRES_DB: continuity_ai
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U continuity_user -d continuity_ai"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: continuity_ai_backend
+    environment:
+      - DATABASE_URL=sqlite:///./continuity.db
+      - JWT_SECRET=demo-secret-key-change-in-production-2026
+      - JWT_EXPIRES_HOURS=8
+      - STORAGE_DIR=/app/storage
+      - MAX_UPLOAD_BYTES=10485760
+      - LLM_PROVIDER=fake
+      - LLM_MODEL=fake-model-v1
+      - GITHUB_MODE=fixture
+      - CORS_ORIGINS=*
+    ports:
+      - "8000:8000"
+    volumes:
+      - backend_storage:/app/storage
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["sh", "-c", "python3 -m app.seed && python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+
+  frontend:
+    image: node:20-alpine
+    container_name: continuity_ai_frontend
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    environment:
+      - VITE_API_MODE=real
+      - VITE_API_BASE_URL=http://localhost:8000/api/v1
+      - PORT=5173
+    ports:
+      - "5173:5173"
+    command: ["sh", "-c", "npm run dev -- --host 0.0.0.0 --port 5173"]
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  backend_storage:

@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "UNSUPPORTED_FILE_TYPE",
+    "message": "Example error message for UNSUPPORTED_FILE_TYPE",
+    "details": null,
+    "request_id": "example-request-id-1234"
+  }
+}

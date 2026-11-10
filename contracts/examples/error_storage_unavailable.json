@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "STORAGE_UNAVAILABLE",
+    "message": "Example error message for STORAGE_UNAVAILABLE",
+    "details": null,
+    "request_id": "example-request-id-1234"
+  }
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "task_id": "task-001",
+    "handover_id": "ho-approved-001",
+    "ordinal": 1,
+    "task_prompt": "Find the current status of login authentication and open its supporting source."
+  },
+  {
+    "task_id": "task-002",
+    "handover_id": "ho-approved-001",
+    "ordinal": 2,
+    "task_prompt": "Identify the next action for login tests and its dependency."
+  },
+  {
+    "task_id": "task-003",
+    "handover_id": "ho-approved-001",
+    "ordinal": 3,
+    "task_prompt": "Find who owns login testing ownership and locate the relevant instructions."
+  }
+]

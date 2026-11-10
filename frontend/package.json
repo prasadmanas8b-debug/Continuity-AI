@@ -1,0 +1,29 @@
+{
+  "name": "continuity-ai-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite 2>/dev/null || node scripts/offline_dev.mjs",
+    "build": "tsc --noEmit && (vite build 2>/dev/null || node scripts/offline_build.mjs)",
+    "preview": "vite preview 2>/dev/null || node scripts/offline_dev.mjs",
+    "gen:types": "openapi-typescript ../contracts/openapi.json -o src/api/generated/schema.d.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node tests/run_contract_and_matrix_tests.mjs"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.59.16",
+    "lucide-react": "^0.454.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.27.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^6.3.0",
+    "openapi-typescript": "^7.4.2",
+    "typescript": "^5.6.3",
+    "vite": "^8.3.6"
+  }
+}

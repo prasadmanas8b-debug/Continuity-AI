@@ -1,0 +1,40 @@
+{
+  "claim_id": "cl-002",
+  "project_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "item_id": "password_reset",
+  "fact_type": "blocker",
+  "statement": "Password reset requires SMTP credentials from cloud provider.",
+  "original_statement": "Password reset requires SMTP credentials from cloud provider.",
+  "owner": null,
+  "verification_status": "uncertain",
+  "conflict_status": "none",
+  "review_status": "pending",
+  "sensitivity": "normal",
+  "audience_roles": [
+    "backend_developer"
+  ],
+  "version": 1,
+  "evidence": [
+    {
+      "evidence_id": "ev-002",
+      "source_id": "11111111-2222-3333-4444-555555555555",
+      "source_label": "project_notes.pdf",
+      "source_date": "2026-11-02",
+      "exact_quote": "Password reset is blocked until the email service is configured.",
+      "locator": {
+        "page": 1,
+        "char_start": 200,
+        "char_end": 265,
+        "path": null,
+        "commit_sha": null
+      },
+      "quote_match_status": "found",
+      "support_status": "partial",
+      "support_note": "Interpretation goes beyond explicit source statement."
+    }
+  ],
+  "conflict_ids": [],
+  "extraction_run_id": "run-001",
+  "created_at": "2026-11-02T10:10:00Z",
+  "updated_at": "2026-11-02T10:10:00Z"
+}

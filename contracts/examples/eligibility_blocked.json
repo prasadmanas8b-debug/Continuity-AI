@@ -1,0 +1,11 @@
+{
+  "eligible_claim_count": 7,
+  "excluded_claim_count": 2,
+  "open_critical_conflicts": [
+    {
+      "conflict_id": "conf-001",
+      "summary": "Conflicting claims regarding completion state detected across sources."
+    }
+  ],
+  "can_approve_without_override": false
+}

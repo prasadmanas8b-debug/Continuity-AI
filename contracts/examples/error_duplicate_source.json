@@ -1,0 +1,10 @@
+{
+  "error": {
+    "code": "DUPLICATE_SOURCE",
+    "message": "Example error message for DUPLICATE_SOURCE",
+    "details": {
+      "sample": "detail"
+    },
+    "request_id": "example-request-id-1234"
+  }
+}

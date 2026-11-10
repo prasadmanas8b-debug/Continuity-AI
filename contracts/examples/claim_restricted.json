@@ -1,0 +1,38 @@
+{
+  "claim_id": "cl-004",
+  "project_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "item_id": "staging_credentials",
+  "fact_type": "decision",
+  "statement": "Database connection password is staging_db_password_123.",
+  "original_statement": "Database connection password is staging_db_password_123.",
+  "owner": null,
+  "verification_status": "verified",
+  "conflict_status": "none",
+  "review_status": "pending",
+  "sensitivity": "restricted",
+  "audience_roles": [],
+  "version": 1,
+  "evidence": [
+    {
+      "evidence_id": "ev-003",
+      "source_id": "22222222-3333-4444-5555-666666666666",
+      "source_label": "credentials_note.txt",
+      "source_date": "2026-11-07",
+      "exact_quote": "Database connection password is staging_db_password_123.",
+      "locator": {
+        "page": 1,
+        "char_start": 0,
+        "char_end": 56,
+        "path": null,
+        "commit_sha": null
+      },
+      "quote_match_status": "found",
+      "support_status": "supports",
+      "support_note": "Quote directly supports claim statement."
+    }
+  ],
+  "conflict_ids": [],
+  "extraction_run_id": "run-001",
+  "created_at": "2026-11-07T10:10:00Z",
+  "updated_at": "2026-11-07T10:10:00Z"
+}

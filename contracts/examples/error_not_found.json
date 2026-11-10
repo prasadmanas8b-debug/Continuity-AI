@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "NOT_FOUND",
+    "message": "Example error message for NOT_FOUND",
+    "details": null,
+    "request_id": "example-request-id-1234"
+  }
+}

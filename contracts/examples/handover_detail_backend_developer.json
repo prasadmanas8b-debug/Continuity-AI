@@ -1,0 +1,95 @@
+{
+  "handover_id": "ho-approved-001",
+  "project_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "version": 1,
+  "status": "approved",
+  "recipient_role": "backend_developer",
+  "included_claim_count": 2,
+  "excluded_claim_count": 2,
+  "approved_by": "user-manager-001",
+  "approved_at": "2026-11-07T16:00:00Z",
+  "approval_override": {
+    "reason": "Overriding login authentication contradiction: login backend merged, testing pending.",
+    "conflict_ids": [
+      "conf-001"
+    ]
+  },
+  "created_at": "2026-11-07T15:00:00Z",
+  "project_name": "Project Roomiez",
+  "project_overview": "Roommate finder application",
+  "sections": [
+    {
+      "section_key": "current_status",
+      "title": "Current Status",
+      "claims": [
+        {
+          "claim_id": "cl-001",
+          "item_id": "login_authentication",
+          "fact_type": "status",
+          "statement": "Login authentication is incomplete.",
+          "owner": null,
+          "verification_status": "verified",
+          "review_status": "unresolved",
+          "uncertainty_label": "conflicted",
+          "evidence": [
+            {
+              "evidence_id": "ev-001",
+              "source_label": "project_notes.pdf",
+              "source_date": "2026-11-02",
+              "exact_quote": "Login authentication is incomplete.",
+              "locator": {
+                "page": 1,
+                "char_start": 120,
+                "char_end": 156,
+                "path": null,
+                "commit_sha": null
+              },
+              "support_status": "supports"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_key": "decisions",
+      "title": "Decisions and Rationale",
+      "claims": [
+        {
+          "claim_id": "cl-007",
+          "item_id": "jwt_sessions",
+          "fact_type": "decision",
+          "statement": "Use JWT sessions instead of server sessions.",
+          "owner": null,
+          "verification_status": "verified",
+          "review_status": "accepted",
+          "uncertainty_label": "none",
+          "evidence": [
+            {
+              "evidence_id": "ev-006",
+              "source_label": "meeting_notes.txt",
+              "source_date": "2026-11-06",
+              "exact_quote": "Decision: use JWT sessions instead of server sessions.",
+              "locator": {
+                "page": 1,
+                "char_start": 100,
+                "char_end": 155,
+                "path": null,
+                "commit_sha": null
+              },
+              "support_status": "supports"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "open_conflicts": [
+    {
+      "conflict_id": "conf-001",
+      "summary": "Conflicting claims regarding completion state detected across sources.",
+      "claim_ids": [
+        "cl-001"
+      ]
+    }
+  ]
+}

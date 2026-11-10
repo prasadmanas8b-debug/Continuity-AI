@@ -1,0 +1,13 @@
+{
+  "handover_id": "ho-draft-001",
+  "project_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "version": 1,
+  "status": "draft",
+  "recipient_role": "backend_developer",
+  "included_claim_count": 6,
+  "excluded_claim_count": 2,
+  "approved_by": null,
+  "approved_at": null,
+  "approval_override": null,
+  "created_at": "2026-11-07T15:00:00Z"
+}

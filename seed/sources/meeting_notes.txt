@@ -1,0 +1,4 @@
+Project Roomiez Meeting Notes - November 6, 2026
+Login authentication has been completed.
+Decision: use JWT sessions instead of server sessions.
+Question: who will configure the email service?

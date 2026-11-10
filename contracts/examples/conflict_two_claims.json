@@ -1,0 +1,99 @@
+{
+  "conflict_id": "conf-001",
+  "project_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "item_id": "login_authentication",
+  "fact_type": "status",
+  "conflict_type": "contradiction",
+  "status": "open",
+  "is_critical": true,
+  "summary": "Conflicting claims regarding completion state detected across sources.",
+  "resolution_note": null,
+  "claims": [
+    {
+      "claim_id": "cl-001",
+      "project_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "item_id": "login_authentication",
+      "fact_type": "status",
+      "statement": "Login authentication is incomplete.",
+      "original_statement": "Login authentication is incomplete.",
+      "owner": null,
+      "verification_status": "verified",
+      "conflict_status": "conflict",
+      "review_status": "pending",
+      "sensitivity": "normal",
+      "audience_roles": [
+        "backend_developer"
+      ],
+      "version": 2,
+      "evidence": [
+        {
+          "evidence_id": "ev-001",
+          "source_id": "11111111-2222-3333-4444-555555555555",
+          "source_label": "project_notes.pdf",
+          "source_date": "2026-11-02",
+          "exact_quote": "Login authentication is incomplete.",
+          "locator": {
+            "page": 1,
+            "char_start": 120,
+            "char_end": 156,
+            "path": null,
+            "commit_sha": null
+          },
+          "quote_match_status": "found",
+          "support_status": "supports",
+          "support_note": "Direct match"
+        }
+      ],
+      "conflict_ids": [
+        "conf-001"
+      ],
+      "extraction_run_id": "run-001",
+      "created_at": "2026-11-02T10:10:00Z",
+      "updated_at": "2026-11-06T11:00:00Z"
+    },
+    {
+      "claim_id": "cl-005",
+      "project_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "item_id": "login_authentication",
+      "fact_type": "status",
+      "statement": "Login authentication has been completed.",
+      "original_statement": "Login authentication has been completed.",
+      "owner": null,
+      "verification_status": "verified",
+      "conflict_status": "conflict",
+      "review_status": "pending",
+      "sensitivity": "normal",
+      "audience_roles": [
+        "backend_developer"
+      ],
+      "version": 2,
+      "evidence": [
+        {
+          "evidence_id": "ev-004",
+          "source_id": "33333333-4444-5555-6666-777777777777",
+          "source_label": "meeting_notes.txt",
+          "source_date": "2026-11-06",
+          "exact_quote": "Login authentication has been completed.",
+          "locator": {
+            "page": 1,
+            "char_start": 50,
+            "char_end": 90,
+            "path": null,
+            "commit_sha": null
+          },
+          "quote_match_status": "found",
+          "support_status": "supports",
+          "support_note": "Direct match"
+        }
+      ],
+      "conflict_ids": [
+        "conf-001"
+      ],
+      "extraction_run_id": "run-002",
+      "created_at": "2026-11-06T10:10:00Z",
+      "updated_at": "2026-11-06T11:00:00Z"
+    }
+  ],
+  "created_at": "2026-11-06T11:00:00Z",
+  "resolved_at": null
+}

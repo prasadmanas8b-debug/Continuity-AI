@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "HANDOVER_IMMUTABLE",
+    "message": "Example error message for HANDOVER_IMMUTABLE",
+    "details": null,
+    "request_id": "example-request-id-1234"
+  }
+}
